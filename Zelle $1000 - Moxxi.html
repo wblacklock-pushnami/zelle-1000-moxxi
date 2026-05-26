@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Claim Your $1,000 Zelle Instant Transfer</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%236d1ed4'/%3E%3Ctext x='16' y='22' text-anchor='middle' font-family='Arial,sans-serif' font-size='18' font-weight='900' fill='%23fff'%3EZ%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* ── Stagger entrance — each element fades up with a small delay ── */
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .rise {
+      opacity: 0;
+      animation: rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .rise-1 { animation-delay: 0.05s; }
+    .rise-2 { animation-delay: 0.18s; }
+    .rise-3 { animation-delay: 0.30s; }
+    .rise-4 { animation-delay: 0.42s; }
+    .rise-5 { animation-delay: 0.54s; }
+    .rise-6 { animation-delay: 0.66s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rise { opacity: 1; animation: none; transform: none; }
+    }
+
+    /* ── Focus styles (keyboard nav) ── */
+    a:focus-visible, button:focus-visible {
+      outline: 3px solid #b388ff;
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: #6D1ED4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 0;
+      flex-shrink: 0;
+    }
+
+    .zelle-wordmark {
+      font-family: 'Inter', sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      color: #fff;
+      letter-spacing: -0.5px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .zelle-wordmark .z-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #6D1ED4;
+      font-weight: 800;
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    /* ── Main ── */
+    .main {
+      background: #111;
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 15px 16px 60px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: #1e2433;
+      border-radius: 14px;
+      width: 100%;
+      max-width: 480px;
+      padding: 28px 24px 32px;
+      text-align: center;
+    }
+
+    .card h1 {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      line-height: 1.25;
+      letter-spacing: -0.3px;
+      text-wrap: balance;
+    }
+
+    .card h1 .amount { color: #b388ff; }
+
+    .card .subhead {
+      font-size: 16px;
+      color: #d6c2ff;
+      font-weight: 600;
+      margin: 0 auto 22px;
+      max-width: 360px;
+      line-height: 1.45;
+      text-wrap: pretty;
+    }
+
+    .card .subhead strong {
+      color: #fff;
+      font-weight: 800;
+    }
+
+    /* ── Zelle Instant Transfer visual ── */
+    .zelle-gc {
+      display: block;
+      position: relative;
+      width: 100%;
+      max-width: 260px;
+      margin: 0 auto 22px;
+      aspect-ratio: 1.586 / 1;
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      background:
+        radial-gradient(circle at 80% 18%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 45%),
+        linear-gradient(135deg, #6D1ED4 0%, #8b3ff7 55%, #4f0aa3 100%);
+      box-shadow:
+        0 18px 36px rgba(0, 0, 0, 0.55),
+        0 4px 10px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255,255,255,0.18);
+      transform-origin: center;
+      animation: gc-wobble 5.5s ease-in-out infinite;
+      will-change: transform;
+      text-align: left;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .zelle-gc::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 12% 90%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 38%);
+      pointer-events: none;
+    }
+
+    .zelle-gc .gc-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .zelle-gc .gc-brand {
+      margin-top: 6px;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .zelle-gc .gc-brand .z-mark {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #fff;
+      color: #6D1ED4;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .zelle-gc .gc-status {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .zelle-gc .gc-status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4cd964;
+      box-shadow: 0 0 0 0 rgba(76, 217, 100, 0.65);
+      animation: pulse-dot 2s ease-out infinite;
+    }
+
+    .zelle-gc .gc-amount {
+      position: absolute;
+      right: 18px;
+      bottom: 14px;
+      font-size: 40px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    }
+
+    /* When the visual also rises, run rise first, then wobble */
+    .zelle-gc.rise {
+      animation:
+        rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+        gc-wobble 5.5s ease-in-out 0.6s infinite;
+    }
+
+    @keyframes gc-wobble {
+      0%, 100% { transform: rotate(0deg); }
+      25%      { transform: rotate(-3.5deg); }
+      75%      { transform: rotate(3.5deg); }
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .zelle-gc { transition: transform 0.3s ease; }
+      .zelle-gc:hover { animation-play-state: paused; transform: rotate(0deg) scale(1.03); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .zelle-gc { animation: none; }
+      .zelle-gc .gc-status::before { animation: none; }
+    }
+
+    /* CTA Button — large tap target (min 48px height) */
+    .cta {
+      display: inline-block;
+      background: linear-gradient(
+        90deg,
+        #8b3ff7 0%,
+        #7a2ce8 20%,
+        #6D1ED4 40%,
+        #5b18b5 50%,
+        #6D1ED4 60%,
+        #7a2ce8 80%,
+        #8b3ff7 100%
+      );
+      background-size: 200% 100%;
+      background-position: 200% 50%;
+      color: #fff;
+      font-size: 17px;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 16px 20px;
+      border-radius: 34px;
+      transition: filter 0.2s, transform 0.15s, box-shadow 0.2s;
+      margin-bottom: 14px;
+      min-height: 48px;
+      width: 100%;
+      max-width: 360px;
+      box-shadow: 0 8px 22px rgba(109, 30, 212, 0.45);
+      animation: cta-gradient 4.5s linear infinite;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+
+    .cta:hover { filter: brightness(1.08); box-shadow: 0 10px 28px rgba(109, 30, 212, 0.6); }
+    .cta:active { transform: scale(0.97); }
+
+    @keyframes cta-gradient {
+      from { background-position: 200% 50%; }
+      to   { background-position: 0% 50%; }
+    }
+
+    /* When the CTA also rises, run rise first, then gradient sweep */
+    .cta.rise {
+      animation:
+        rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+        cta-gradient 4.5s linear 0.6s infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cta, .cta.rise { animation: none; }
+    }
+
+    /* Card icons */
+    .card-icons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .card-icons svg {
+      width: 42px;
+      height: 27px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .social-proof {
+      font-size: 14px;
+      color: #a8b0c0;
+      margin-bottom: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      line-height: 1.4;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .social-proof strong {
+      color: #e6ebf5;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #8b3ff7;
+      box-shadow: 0 0 0 0 rgba(139, 63, 247, 0.7);
+      animation: pulse-dot 2s ease-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulse-dot {
+      0%   { box-shadow: 0 0 0 0 rgba(139, 63, 247, 0.65); }
+      70%  { box-shadow: 0 0 0 9px rgba(139, 63, 247, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(139, 63, 247, 0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pulse-dot { animation: none; }
+    }
+
+    .confetti-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .secure-text {
+      font-size: 15px;
+      color: #b0b5c4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .secure-text svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+
+    .fine-print {
+      font-size: 13px;
+      color: #a0a5b4;
+      margin-top: 14px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      background: #111;
+      padding: 24px 16px 30px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px 28px;
+      margin-bottom: 20px;
+    }
+
+    .footer-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 6px 4px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .footer-links a:hover { text-decoration: underline; }
+
+    .footer-copy {
+      font-size: 14px;
+      color: #ccc;
+      margin-bottom: 8px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .footer-disclosure {
+      font-size: 13px;
+      color: #aaa;
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.55;
+      text-wrap: pretty;
+    }
+
+    /* ── Desktop adjustments ── */
+    @media (min-width: 600px) {
+      .main { padding-top: 32px; }
+
+      .card {
+        padding: 36px 40px 40px;
+      }
+
+      .card h1 {
+        font-size: 34px;
+      }
+
+      .card .subhead {
+        font-size: 18px;
+      }
+
+      .cta {
+        font-size: 20px;
+        padding: 18px 32px;
+        letter-spacing: 0.3px;
+      }
+
+      .zelle-gc {
+        max-width: 290px;
+      }
+
+      .footer-links {
+        gap: 14px 40px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <span class="zelle-wordmark" aria-label="Zelle">
+      <span class="z-mark" aria-hidden="true">Z</span>
+      <span>zelle</span>
+    </span>
+  </header>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="card">
+      <div class="zelle-gc rise rise-1" role="img" aria-label="$1,000 Zelle instant transfer">
+        <span class="gc-label">Instant Transfer</span>
+        <span class="gc-brand">
+          <span class="z-mark" aria-hidden="true">Z</span>
+          zelle
+        </span>
+        <span class="gc-status" aria-hidden="true">Approved</span>
+        <span class="gc-amount">$1,000</span>
+      </div>
+
+      <h1 class="rise rise-2">You've Won a <span class="amount">$1,000</span> Zelle Instant Transfer!</h1>
+      <p class="subhead rise rise-3">Claim your entry for your chance to receive a <strong>$1,000 Zelle instant transfer</strong> straight to your account.</p>
+
+      <a class="cta rise rise-4" id="lp-pom-button-161" href="https://pushnami.everflowclient.io/offers/21980" target="_blank" rel="noopener">Send Cash to my Account</a>
+
+      <p class="social-proof rise rise-5" aria-live="polite">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        <span><strong id="redeem-count">—</strong> people redeemed today</span>
+      </p>
+
+      <div class="card-icons rise rise-6" aria-label="Accepted payment networks">
+        <!-- Discover -->
+        <svg viewBox="0 0 780 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill-rule="evenodd"><path d="M54.992 0C24.627 0 0 24.63 0 55.004v390.992C0 476.376 24.619 501 54.992 501h670.016C755.373 501 780 476.37 780 445.996V55.004C780 24.624 755.381 0 725.008 0H54.992z" fill="#4D4D4D"/><path d="M327.152 161.893c8.837 0 16.248 1.784 25.268 6.09v22.751c-8.544-7.863-15.955-11.154-25.756-11.154-19.264 0-34.414 15.015-34.414 34.05 0 20.075 14.681 34.196 35.37 34.196 9.312 0 16.586-3.12 24.8-10.857v22.763c-9.341 4.14-16.911 5.776-25.756 5.776-31.278 0-55.582-22.596-55.582-51.737 0-28.826 24.951-51.878 56.07-51.878zm-97.113.627c11.546 0 22.11 3.72 30.943 10.994l-10.748 13.248c-5.35-5.646-10.41-8.028-16.564-8.028-8.853 0-15.3 4.745-15.3 10.989 0 5.354 3.619 8.188 15.944 12.482 23.365 8.044 30.29 15.176 30.29 30.926 0 19.193-14.976 32.553-36.32 32.553-15.63 0-26.994-5.795-36.458-18.872l13.268-12.03c4.73 8.61 12.622 13.222 22.42 13.222 9.163 0 15.947-5.952 15.947-13.984 0-4.164-2.055-7.734-6.158-10.258-2.066-1.195-6.158-2.977-14.2-5.647-19.291-6.538-25.91-13.527-25.91-27.185 0-16.225 14.214-28.41 32.846-28.41zm234.723 1.728h22.437l28.084 66.592 28.446-66.592h22.267l-45.494 101.686h-11.053l-44.687-101.686zm-397.348.152h30.15c33.312 0 56.534 20.382 56.534 49.641 0 14.59-7.104 28.696-19.118 38.057-10.108 7.901-21.626 11.445-37.574 11.445H67.414V164.4zm96.135 0h20.54v99.143h-20.54V164.4zm411.734 0h58.252v16.8H595.81v22.005h36.336v16.791h-36.336v26.762h37.726v16.785h-58.252V164.4zm71.858 0h30.455c23.69 0 37.265 10.71 37.265 29.272 0 15.18-8.514 25.14-23.986 28.105l33.148 41.766h-25.26l-28.429-39.828h-2.678v39.828h-20.515V164.4zm20.515 15.616v30.025h6.002c13.117 0 20.069-5.362 20.069-15.328 0-9.648-6.954-14.697-19.745-14.697h-6.326zM87.94 181.199v65.559h5.512c13.273 0 21.656-2.394 28.11-7.88 7.103-5.955 11.376-15.465 11.376-24.98 0-9.499-4.273-18.725-11.376-24.681-6.785-5.78-14.837-8.018-28.11-8.018H87.94z" fill="#FFF"/><path d="m415.13 161.21c30.941 0 56.022 23.58 56.022 52.709v0.033c0 29.13-25.081 52.742-56.021 52.742s-56.022-23.613-56.022-52.742v-0.033c0-29.13 25.082-52.71 56.022-52.71zm364.85 127.15c-26.05 18.33-221.08 149.34-558.75 212.62h503.76c30.365 0 54.992-24.63 54.992-55.004v-157.62z" fill="#F47216"/></g></svg>
+        <!-- Visa -->
+        <svg viewBox="0 0 780 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g clip-path="url(#v)"><path d="M40 0H740C762.092 0 780 17.909 780 40V460C780 482.092 762.092 500 740 500H40C17.909 500 0 482.092 0 460V40C0 17.909 17.909 0 40 0Z" fill="#1434CB"/><path d="M489.823 143.111C442.988 143.111 401.134 167.393 401.134 212.256C401.134 263.706 475.364 267.259 475.364 293.106C475.364 303.989 462.895 313.731 441.6 313.731C411.377 313.731 388.789 300.119 388.789 300.119L379.123 345.391C379.123 345.391 405.145 356.889 439.692 356.889C490.898 356.889 531.19 331.415 531.19 285.784C531.19 231.419 456.652 227.971 456.652 203.981C456.652 195.455 466.887 186.114 488.122 186.114C512.081 186.114 531.628 196.014 531.628 196.014L541.087 152.289C541.087 152.289 519.818 143.111 489.823 143.111ZM61.3294 146.411L60.1953 153.011C60.1953 153.011 79.8988 156.618 97.645 163.814C120.495 172.064 122.122 176.868 125.971 191.786L167.905 353.486H224.118L310.719 146.411H254.635L198.989 287.202L176.282 167.861C174.199 154.203 163.651 146.411 150.74 146.411H61.3294ZM333.271 146.411L289.275 353.486H342.756L386.598 146.411H333.271ZM631.554 146.411C618.658 146.411 611.825 153.318 606.811 165.386L528.458 353.486H584.542L595.393 322.136H663.72L670.318 353.486H719.805L676.633 146.411H631.554ZM638.848 202.356L655.473 280.061H610.935L638.848 202.356Z" fill="white"/></g><defs><clipPath id="v"><rect width="780" height="500" fill="white"/></clipPath></defs></svg>
+        <!-- Mastercard -->
+        <svg viewBox="0 0 780 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g clip-path="url(#m)"><path d="M40 0H740C762.092 0 780 17.909 780 40V460C780 482.092 762.092 500 740 500H40C17.909 500 0 482.092 0 460V40C0 17.909 17.909 0 40 0Z" fill="#253747"/><path d="M465.738 69.1387H313.812V342.088H465.738V69.1387Z" fill="#FF5A00"/><path d="M323.926 205.613C323.926 150.158 349.996 100.94 390 69.1387C360.559 45.9902 323.42 32 282.91 32C186.945 32 109.297 109.648 109.297 205.613C109.297 301.578 186.945 379.227 282.91 379.227C323.42 379.227 360.559 365.237 390 342.088C349.94 310.737 323.926 261.069 323.926 205.613Z" fill="#EB001B"/><path d="M670.711 205.613C670.711 301.578 593.062 379.227 497.098 379.227C456.588 379.227 419.449 365.237 390.008 342.088C430.518 310.231 456.082 261.069 456.082 205.613C456.082 150.158 430.012 100.94 390.008 69.1387C419.393 45.9902 456.532 32 497.041 32C593.062 32 670.711 110.154 670.711 205.613Z" fill="#F79E1B"/></g><defs><clipPath id="m"><rect width="780" height="500" fill="white"/></clipPath></defs></svg>
+        <!-- Amex -->
+        <svg viewBox="0 0 780 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="m40 1e-3h700c22.092 0 40 17.909 40 40v420c0 22.092-17.908 40-40 40h-700c-22.091 0-40-17.908-40-40v-420c0-22.091 17.909-40 40-40z" fill="#2557D6"/><path d="m0.253 235.69h37.441l8.442-19.51h18.9l8.42 19.51h73.668v-14.915l6.576 14.98h38.243l6.576-15.202v15.138h183.08l-0.085-32.026h3.542c2.479 0.083 3.204 0.302 3.204 4.226v27.8h94.689v-7.455c7.639 3.92 19.518 7.455 35.148 7.455h39.836l8.525-19.51h18.9l8.337 19.51h76.765v-18.532l11.626 18.532h61.515v-122.51h-60.88v14.468l-8.522-14.468h-62.471v14.468l-7.828-14.468h-84.38c-14.123 0-26.539 1.889-36.569 7.153v-7.153h-58.229v7.153c-6.383-5.426-15.079-7.153-24.75-7.153h-212.74l-14.274 31.641-14.659-31.641h-67.005v14.468l-7.362-14.468h-57.145l-26.539 58.246v64.261h3e-3zm236.34-17.67h-22.464l-0.083-68.794-31.775 68.793h-19.24l-31.858-68.854v68.854h-44.57l-8.42-19.592h-45.627l-8.505 19.592h-23.801l39.241-87.837h32.559l37.269 83.164v-83.164h35.766l28.678 59.587 26.344-59.587h36.485l1e-3 87.838zm-165.9-37.823l-14.998-35.017-14.915 35.017h29.913zm255.3 37.821h-73.203v-87.837h73.203v18.291h-51.289v15.833h50.06v18.005h-50.061v17.542h51.289l1e-3 18.166zm103.16-64.18c0 14.004-9.755 21.24-15.439 23.412 4.794 1.748 8.891 4.838 10.84 7.397 3.094 4.369 3.628 8.271 3.628 16.116v17.255h-22.104l-0.083-11.077c0-5.285 0.528-12.886-3.458-17.112-3.202-3.09-8.083-3.76-15.973-3.76h-23.523v31.95h-21.914v-87.838h50.401c11.199 0 19.451 0.283 26.535 4.207 6.933 3.924 11.09 9.652 11.09 19.45zm-27.699 13.042c-3.013 1.752-6.573 1.81-10.841 1.81h-26.62v-19.51h26.982c3.818 0 7.804 0.164 10.393 1.584 2.842 1.28 4.601 4.003 4.601 7.765 0 3.84-1.674 6.929-4.515 8.351zm62.844 51.138h-22.358v-87.837h22.358v87.837zm259.56 0h-31.053l-41.535-65.927v65.927h-44.628l-8.527-19.592h-45.521l-8.271 19.592h-25.648c-10.649 0-24.138-2.257-31.773-9.715-7.701-7.458-11.708-17.56-11.708-33.533 0-13.027 2.395-24.936 11.812-34.347 7.085-7.01 18.18-10.242 33.28-10.242h21.215v18.821h-20.771c-7.997 0-12.514 1.14-16.862 5.203-3.735 3.699-6.298 10.69-6.298 19.897 0 9.41 1.951 16.196 6.023 20.628 3.373 3.476 9.506 4.53 15.272 4.53h9.842l30.884-69.076h32.835l37.102 83.081v-83.08h33.366l38.519 61.174v-61.174h22.445v87.833zm-133.2-37.82l-15.165-35.017-15.081 35.017h30.246zm189.04 178.08c-5.322 7.457-15.694 11.238-29.736 11.238h-42.319v-18.84h42.147c4.181 0 7.106-0.527 8.868-2.175 1.665-1.474 2.605-3.554 2.591-5.729 0-2.561-1.064-4.593-2.677-5.811-1.59-1.342-3.904-1.95-7.722-1.95-20.574-0.67-46.244 0.608-46.244-27.194 0-12.742 8.443-26.156 31.439-26.156h43.649v-17.479h-40.557c-12.237 0-21.129 2.81-27.425 7.174v-7.175h-59.985c-9.595 0-20.854 2.279-26.179 7.175v-7.175h-107.12v7.175c-8.524-5.892-22.908-7.175-29.549-7.175h-70.656v7.175c-6.745-6.258-21.742-7.175-30.886-7.175h-79.077l-18.094 18.764-16.949-18.764h-118.13v122.59h115.9l18.646-19.062 17.565 19.062 71.442 0.061v-28.838h7.021c9.479 0.14 20.66-0.228 30.523-4.312v33.085h58.928v-31.952h2.842c3.628 0 3.985 0.144 3.985 3.615v28.333h179.01c11.364 0 23.244-2.786 29.824-7.845v7.845h56.78c11.815 0 23.354-1.587 32.134-5.649l2e-3 -22.84zm-354.94-47.155c0 24.406-19.005 29.445-38.159 29.445h-27.343v29.469h-42.591l-26.984-29.086-28.042 29.086h-86.802v-87.859h88.135l26.961 28.799 27.875-28.799h70.021c17.389 0 36.929 4.613 36.929 28.945zm-174.22 40.434h-53.878v-17.48h48.11v-17.926h-48.11v-15.974h54.939l23.969 25.604-25.03 25.776zm86.81 10.06l-33.644-35.789 33.644-34.65v70.439zm49.757-39.066h-28.318v-22.374h28.572c7.912 0 13.404 3.09 13.404 10.772 0 7.599-5.238 11.602-13.658 11.602zm148.36-40.373h73.138v18.17h-51.315v15.973h50.062v17.926h-50.062v17.48l51.314 0.08v18.23h-73.139l2e-3 -87.859zm-28.119 47.029c4.878 1.725 8.865 4.816 10.734 7.375 3.095 4.291 3.542 8.294 3.631 16.037v17.418h-22.002v-10.992c0-5.286 0.531-13.112-3.542-17.198-3.201-3.147-8.083-3.899-16.076-3.899h-23.42v32.09h-22.02v-87.859h50.594c11.093 0 19.173 0.47 26.366 4.146 6.915 3.924 11.266 9.487 11.266 19.511-1e-3 14.022-9.764 21.178-15.531 23.371zm-12.385-11.107c-2.932 1.667-6.556 1.811-10.818 1.811h-26.622v-19.51h26.982c3.902 0 7.807 0.08 10.393 1.584 2.842 1.28 4.601 4.003 4.601 7.765 0 3.84-1.674 6.929-4.515 8.351zm197.82 5.597c4.27 4.229 6.554 9.571 6.554 18.613 0 18.9-12.322 27.723-34.425 27.723h-42.68v-18.84h42.51c4.157 0 7.104-0.525 8.95-2.175 1.508-1.358 2.589-3.333 2.589-5.729 0-2.561-1.17-4.592-2.675-5.811-1.675-1.34-3.986-1.949-7.803-1.949-20.493-0.67-46.157 0.609-46.157-27.192 0-12.744 8.355-26.158 31.33-26.158h43.932v18.7h-40.198c-3.984 0-6.575 0.145-8.779 1.587-2.4 1.422-3.29 3.534-3.29 6.319 0 3.314 2.037 5.57 4.795 6.546 2.311 0.77 4.795 0.995 8.526 0.995l11.797 0.306c11.895 0.276 20.061 2.248 25.024 7.065zm86.955-23.52h-39.938c-3.986 0-6.638 0.144-8.867 1.587-2.312 1.423-3.202 3.534-3.202 6.322 0 3.314 1.951 5.568 4.791 6.544 2.312 0.771 4.795 0.996 8.444 0.996l11.878 0.304c11.983 0.284 19.982 2.258 24.86 7.072 0.891 0.67 1.422 1.422 2.033 2.175v-25h1e-3z" fill="#fff"/></svg>
+      </div>
+
+      <p class="secure-text rise rise-6">
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 1C5.34 1 4 2.34 4 4v2H3a1 1 0 00-1 1v5a1 1 0 001 1h8a1 1 0 001-1V7a1 1 0 00-1-1h-1V4c0-1.66-1.34-3-3-3zm-1.5 3c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v2h-3V4z" fill="#b0b5c4"/></svg>
+        Securely processed
+      </p>
+      <p class="fine-print rise rise-6">No purchase necessary.</p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <nav class="footer-links" aria-label="Footer">
+      <a href="https://info.thecashmint.com/terms-conditions/" target="_blank" rel="noopener">Terms &amp; Conditions</a>
+      <a href="https://info.thecashmint.com/privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>
+      <a href="https://info.thecashmint.com/ccpa/" target="_blank" rel="noopener">CCPA</a>
+      <a href="https://info.thecashmint.com/contact/" target="_blank" rel="noopener">Contact Us</a>
+    </nav>
+    <p class="footer-copy">&copy; 2026 TheCashMint.com</p>
+    <p class="footer-disclosure">TheCashMint is supported by its users. When you click links on our site, we may earn an affiliate commission. Trade names or rights associated with all brands on this site are the property of their respective owners and are not affiliated with this promotion.</p>
+  </footer>
+
+  <canvas id="confetti" class="confetti-canvas" aria-hidden="true"></canvas>
+
+  <script>
+    // Social-proof count — monotonically increases on each page load.
+    (function () {
+      var el = document.getElementById('redeem-count');
+      if (!el) return;
+      var KEY = 'redeem_count_zelle_v1';
+      var stored = parseInt(localStorage.getItem(KEY), 10);
+      var next;
+      if (Number.isFinite(stored) && stored > 0) {
+        next = stored + 10 + Math.floor(Math.random() * 21);
+      } else {
+        next = 1247 + Math.floor(Math.random() * 80);
+      }
+      try { localStorage.setItem(KEY, String(next)); } catch (e) {}
+      el.textContent = next.toLocaleString();
+    })();
+
+    // Subtle one-shot confetti on load. Respects reduced-motion.
+    (function () {
+      var canvas = document.getElementById('confetti');
+      if (!canvas) return;
+      if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        canvas.remove();
+        return;
+      }
+      var ctx = canvas.getContext('2d');
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      function resize() {
+        canvas.width  = Math.floor(window.innerWidth  * dpr);
+        canvas.height = Math.floor(window.innerHeight * dpr);
+        canvas.style.width  = window.innerWidth  + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      var colors = ['#8b3ff7', '#6D1ED4', '#b388ff', '#d6c2ff', '#ffffff', '#4cd964'];
+      var COUNT = 55;
+      var DURATION = 3800;
+
+      function spawn() {
+        return {
+          x: Math.random() * window.innerWidth,
+          y: -20 - Math.random() * window.innerHeight * 0.35,
+          vx: (Math.random() - 0.5) * 1.6,
+          vy: 1.4 + Math.random() * 2.6,
+          r: 4 + Math.random() * 5,
+          rot: Math.random() * Math.PI * 2,
+          vr: (Math.random() - 0.5) * 0.22,
+          color: colors[(Math.random() * colors.length) | 0],
+          shape: Math.random() > 0.45 ? 'rect' : 'circle'
+        };
+      }
+
+      var particles = [];
+      for (var i = 0; i < COUNT; i++) particles.push(spawn());
+
+      var start = performance.now();
+      function tick(now) {
+        var t = now - start;
+        var life = Math.max(0, 1 - t / DURATION);
+        var alpha = Math.min(1, life * 1.8);
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        for (var i = 0; i < particles.length; i++) {
+          var p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.04;
+          p.rot += p.vr;
+          ctx.save();
+          ctx.globalAlpha = alpha;
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rot);
+          ctx.fillStyle = p.color;
+          if (p.shape === 'rect') {
+            ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 0.55);
+          } else {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.r / 2, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+        if (t < DURATION) {
+          requestAnimationFrame(tick);
+        } else {
+          canvas.remove();
+        }
+      }
+      requestAnimationFrame(tick);
+    })();
+  </script>
+
+  <!-- Everflow / LinkHandler config -->
+  <script>
+    const config1 = {
+      allowedPubs: ['2KXGDCR'],
+      defaultPub: '2KXGDCR',
+      defaultOptinPub: '462294',
+      thankyouUrl: "https://pp1.thecashmint.com/thank-you/b.html",
+      buttonIds: [
+        "lp-pom-button-161"
+      ],
+      sid: "RT688W",
+      siteId: "67083d6f9388db001310bfdc",
+      tracking: "everflow",
+      offerId: "21980"
+    };
+    if (typeof LinkHandler !== 'undefined') {
+      const linkHandler = new LinkHandler();
+      linkHandler.handlePage(config1);
+    }
+  </script>
+</body>
+</html>
