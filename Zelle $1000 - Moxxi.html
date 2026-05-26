@@ -70,24 +70,31 @@
       max-width: 100%;
     }
 
-    /* ── Main ── */
+    /* ── Main ── deep Zelle purple */
     .main {
-      background: #111;
+      background: #1a0540;
       flex: 1;
       display: flex;
       align-items: flex-start;
       justify-content: center;
       padding: 15px 16px 60px;
+      background-image:
+        radial-gradient(1200px 600px at 50% -200px, rgba(139, 63, 247, 0.22), transparent 60%),
+        radial-gradient(800px 400px at 100% 100%, rgba(109, 30, 212, 0.18), transparent 60%);
     }
 
-    /* ── Card ── */
+    /* ── Card ── richer purple, slightly lighter than main */
     .card {
-      background: #1e2433;
+      background: #2a0d6a;
       border-radius: 14px;
       width: 100%;
       max-width: 480px;
       padding: 28px 24px 32px;
       text-align: center;
+      box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 1px 2px rgba(0, 0, 0, 0.2),
+        0 30px 60px rgba(20, 4, 60, 0.55);
     }
 
     .card h1 {
@@ -376,9 +383,9 @@
       text-align: center;
     }
 
-    /* ── Footer ── */
+    /* ── Footer ── matches main */
     .footer {
-      background: #111;
+      background: #1a0540;
       padding: 24px 16px 30px;
       text-align: center;
       flex-shrink: 0;
